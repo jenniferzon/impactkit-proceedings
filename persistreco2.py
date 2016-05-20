@@ -8,7 +8,7 @@ TurboConf().PersistReco = True
 pions = DataOnDemand('Phys/StdAllNoPIDsPions/Particles')
 ks0 = CombineParticles('Ks0Topipi',
                         DecayDescriptors=['[KS0 -> pi+ pi+]cc'],
-                        CombinationCut=("AM > 320*MeV"), #parent
+                        CombinationCut=("AM < 320*MeV"), #parent
                         MotherCut="ALL")
 ks0_sel = Selection(
     'Sel_Ks0Topipi',
