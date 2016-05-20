@@ -8,7 +8,7 @@ TurboConf().PersistReco = True
 pions = DataOnDemand('Phys/StdAllNoPIDsPions/Particles')
 ks0 = CombineParticles('Ks0Topipi',
                         DecayDescriptors=['[KS0 -> pi+ pi+]cc'],
-                        CombinationCut=("AM < 320*MeV"), #parent
+                        CombinationCut=("AM > 320*MeV"), #parent
                         MotherCut="ALL")
 ks0_sel = Selection(
     'Sel_Ks0Topipi',
@@ -29,7 +29,7 @@ dtt_ks0.addBranches({
     'pi2': '[KS0 -> pi+ ^pi+]CC'
 })
 
-DaVinci().UserAlgorithms = [dtt_ks0, ks0_selseq.sequence()]
+DaVinci().UserAlgorithms = [ks0_selseq.sequence(), dtt_ks0]
 DaVinci().DataType = '2016'
 DaVinci().EvtMax = 1000
 DaVinci().TupleFile = 'PersistRecoTuple_ks0_pipi.root'
