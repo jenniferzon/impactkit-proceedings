@@ -77,17 +77,19 @@ bool CheckOverlap::searchOverlap( std::vector<const LHCb::ProtoParticle* > & pro
           if (msgLevel(MSG::VERBOSE)) verbose() << "Found overlap " << *i << endmsg ;
           return true ;
       }
-      const LHCb::Track* itrack = (*i)->track();
-      const LHCb::Track* jtrack = (*j)->track();
-      double difference = abs(itrack->p() - jtrack->p());
-      if (difference == 0.) {std::cout << "diff: " << difference << " and id: " << itrack->nLHCbIDs() << " and common: " << itrack->nCommonLhcbIDs(*jtrack) << std:: endl; } 
-      if ((int)(itrack->nLHCbIDs()) == (int)(itrack->nCommonLhcbIDs(*jtrack)))
-      {
-          std::cout << "Found overlap" << std::endl;
-          if (msgLevel(MSG::VERBOSE)) verbose() << "Found overlap " << *i << endmsg ;
-          return true ;
+      else {
+        const std::vector<LHCb::LHCbID> i_ids = (*i)->track()->lhcbIDs();
+        const std::vector<LHCb::LHCbID> j_ids = (*j)->track()->lhcbIDs();
+        std::vector<LHCb::LHCbID> diff;
+        std::set_symmetric_difference(i_ids.begin(), i_ids.end(), j_ids.begin(), j_ids.end(), std::back_inserter(diff));
+
+        if (std::all_of(diff.begin(), diff.end(), [] (LHCb::LHCbID id) { return id.isCalo(); } ))
+        {
+          if (msgLevel(MSG::VERBOSE)) verbose() << "Found overlap using LHCb IDs, ignoring isCalo IDs" << *i << endmsg ;
+          return true;
+        }
       }
-    }
+     }
   }
   if (msgLevel(MSG::VERBOSE)) verbose() << "Found no overlap" << endmsg ;
   return false;
