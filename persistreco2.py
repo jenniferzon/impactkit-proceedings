@@ -1,9 +1,8 @@
-from Configurables import DaVinci, DecayTreeTuple, TurboConf
+from Configurables import DaVinci, CombineParticles, DecayTreeTuple, TurboConf, DstConf
 from DecayTreeTuple import Configuration
-from Configurables import CombineParticles
-
 from PhysSelPython.Wrappers import Selection, SelectionSequence, DataOnDemand
 
+DstConf().Turbo = True
 TurboConf().PersistReco = True
 
 pions = DataOnDemand('Phys/StdAllNoPIDsPions/Particles')
@@ -20,7 +19,6 @@ ks0_selseq = SelectionSequence(
     'SelSeq_Ks0Topipi',
     TopSelection=ks0_sel
 )
-
 
 dtt_ks0 = DecayTreeTuple('TupleKs0Topipi')
 dtt_ks0.Inputs = ks0_selseq.outputLocations()
