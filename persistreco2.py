@@ -22,7 +22,7 @@ ks0_selseq = SelectionSequence(
 
 dtt_ks0 = DecayTreeTuple('TupleKs0Topipi')
 dtt_ks0.Inputs = ks0_selseq.outputLocations()
-dtt_ks0.Decay = '[KS0 -> pi+ pi+]CC'
+dtt_ks0.Decay = '[KS0 -> ^pi+ ^pi+]CC'
 dtt_ks0.addBranches({
     'Ks0': '[KS0 -> pi+ pi+]CC',
     'pi1': '[KS0 -> ^pi+ pi+]CC',
