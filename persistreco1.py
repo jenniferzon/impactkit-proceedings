@@ -42,6 +42,7 @@ dst_selseq = SelectionSequence(
 )
 
 dtt_dst = DecayTreeTuple('TupleDstToD0pi_D0ToKpi_PersistReco')
+dtt_dst.addTupleTool('TupleToolTrackInfo')
 dtt_dst.Inputs = dst_selseq.outputLocations()
 dtt_dst.Decay = '[D*(2010)+ -> ^(D0 -> ^K- ^pi+) ^pi+]CC'
 dtt_dst.addBranches({
@@ -61,7 +62,7 @@ dstar_hybrid.Variables = {
 DaVinci().UserAlgorithms = [dtt, dst_selseq.sequence(), dtt_dst]
 DaVinci().DataType ='2016'
 
-DaVinci().EvtMax=10000
+DaVinci().EvtMax=1000
 
 DaVinci().TupleFile = 'PersistRecoTuple2.root'
 
