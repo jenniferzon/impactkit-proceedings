@@ -1,9 +1,12 @@
-from Configurables import  DaVinci, DecayTreeTuple
+from Configurables import  DaVinci, DecayTreeTuple, TurboConf
 from DecayTreeTuple import Configuration
 
 from Configurables import CombineParticles, DaVinci, FilterDesktop
 
 from PhysSelPython.Wrappers import Selection, SelectionSequence, DataOnDemand
+
+TurboConf().PersistReco=True
+
 
 pions = DataOnDemand('Phys/StdAllNoPIDsPions/Particles')
 
