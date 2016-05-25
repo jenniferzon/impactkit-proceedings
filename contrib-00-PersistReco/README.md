@@ -1,0 +1,4 @@
+The PersistReco flag available in Turbo stream HLT2 lines allows all the reconstructed objects in an event to be saved to disk, rather than the usual behaviour of saving only the selected candidate. The objects can then be used in DaVinci just like in the stripping. This is useful when one wants to do things like spectroscopy studies, where there may be many final states of interesting that re-use the same ground state particle. Today, there is a bug that can cause the same underlying particle object to be used multiple times when building a decay.
+
+
+The function CombineParticles()::checkOverlap() normally ensures this does not happen. The code "Phys/DaVinciOverlapsAndClones/src/CheckOverlap.cpp", which contains this function has been modified, so that no more duplicates will be used even in the case of objects from different locations.
